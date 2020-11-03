@@ -9,4 +9,7 @@ import com.epam.jwd.core_final.domain.Spaceship;
 public class SpaceshipCriteria extends Criteria<Spaceship> {
 
 
+    protected SpaceshipCriteria(Builder<?> builder) {
+        super(builder);
+    }
 }
