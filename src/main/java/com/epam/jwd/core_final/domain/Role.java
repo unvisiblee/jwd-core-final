@@ -20,7 +20,7 @@ public enum Role implements BaseEntity {
     }
 
     /**
-     * todo via java.lang.enum methods! done
+     * via java.lang.enum methods! done
      */
     @Override
     public String getName() {
@@ -28,10 +28,10 @@ public enum Role implements BaseEntity {
     }
 
     /**
-     * todo via java.lang.enum methods! done
+     * via java.lang.enum methods! done
      * @throws UnknownEntityException if such id does not exist
      */
-    public static Role resolveRoleById(int id) {
+    public static Role resolveRoleById(int id) throws UnknownEntityException {
         for (Role role: Role.values()) {
             if (role.id.equals((long) id))
                 return role;

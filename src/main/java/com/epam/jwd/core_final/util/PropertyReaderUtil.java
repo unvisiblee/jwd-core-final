@@ -6,12 +6,10 @@ import java.io.*;
 import java.util.Properties;
 
 
-public final class PropertyReaderUtil {
+public enum PropertyReaderUtil {
+    INSTANCE;
 
     private static final Properties properties = new Properties();
-
-    private PropertyReaderUtil() {
-    }
 
     /**
      * try-with-resource using FileInputStream
