@@ -9,9 +9,8 @@ import com.epam.jwd.core_final.factory.EntityFactory;
 // do the same for other entities
 public class CrewMemberFactory implements EntityFactory<CrewMember> {
 
-    @Override
     public CrewMember create(Object... args) throws IllegalCrewMemberCreateArgsException {
-        // String name, Role role, Rank rank arguments
+        // String name, Role role, Rank rank - arguments
         if (args.length != 3)
             throw new IllegalCrewMemberCreateArgsException(args);
 

@@ -5,5 +5,5 @@ import com.epam.jwd.core_final.exception.IllegalCreateArgsException;
 
 public interface EntityFactory<T extends BaseEntity> {
 
-    T create(Object... args) throws IllegalCreateArgsException;
+    public T create(Object... args) throws IllegalCreateArgsException;
 }

@@ -8,11 +8,11 @@ import com.epam.jwd.core_final.factory.EntityFactory;
  */
 public abstract class Criteria<T extends BaseEntity> {
     private String name;
-    private Integer id;
+    private Long id;
 
     public abstract static class Builder<T extends Builder<T>> {
         private String name;
-        private Integer id;
+        private Long id;
 
         protected abstract T getThis(); // method to avoid unchecked casts ( for ex. return (T) this)
 
@@ -21,7 +21,7 @@ public abstract class Criteria<T extends BaseEntity> {
             return getThis();
         }
 
-        public T id(Integer newId) {
+        public T id(Long newId) {
             this.id = newId;
             return getThis();
         }
@@ -38,7 +38,7 @@ public abstract class Criteria<T extends BaseEntity> {
         return name;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 }

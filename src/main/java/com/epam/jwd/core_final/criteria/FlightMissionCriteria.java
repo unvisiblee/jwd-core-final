@@ -21,7 +21,7 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
     private MissionResult missionResult;
 
 
-    public static class FlightMissionCriteriaBuilder extends Criteria.Builder<FlightMissionCriteria.FlightMissionCriteriaBuilder> {
+    public static class FlightMissionCriteriaBuilder extends Builder<FlightMissionCriteria.FlightMissionCriteriaBuilder> {
         private String name;
         private LocalDate startDate;
         private LocalDate endDate;
@@ -32,37 +32,37 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
 
         public FlightMissionCriteriaBuilder name(String newName) {
             this.name = name;
-            return getThis();
+            return this;
         }
 
         public FlightMissionCriteriaBuilder startDate(LocalDate newStartDate) {
             this.startDate = newStartDate;
-            return getThis();
+            return this;
         }
 
         public FlightMissionCriteriaBuilder endDate(LocalDate newEndDate) {
             this.endDate = newEndDate;
-            return getThis();
+            return this;
         }
 
         public FlightMissionCriteriaBuilder distance(Long newDistance) {
             this.distance = newDistance;
-            return getThis();
+            return this;
         }
 
         public FlightMissionCriteriaBuilder assignedSpaceShip(Spaceship newSpaceShip) {
             this.assignedSpaceShip = newSpaceShip;
-            return getThis();
+            return this;
         }
 
         public FlightMissionCriteriaBuilder assignedCrew(List<CrewMember> newCrew) {
             this.assignedCrew = newCrew;
-            return getThis();
+            return this;
         }
 
         public FlightMissionCriteriaBuilder missionResult(MissionResult newMissionResult) {
             this.missionResult = newMissionResult;
-            return getThis();
+            return this;
         }
 
         @Override
@@ -72,7 +72,7 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
 
         @Override
         public Criteria<FlightMission> build() {
-            FlightMissionCriteria criteria = new FlightMissionCriteria(getThis());
+            FlightMissionCriteria criteria = new FlightMissionCriteria(this);
             criteria.assignedCrew = this.assignedCrew;
             criteria.assignedSpaceShip = this.assignedSpaceShip;
             criteria.distance = this.distance;
