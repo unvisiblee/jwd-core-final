@@ -51,7 +51,7 @@ public enum SpaceshipServiceImpl implements SpaceshipService {
     }
 
     @Override
-    public void assignSpaceshipOnMission(Spaceship crewMember) throws RuntimeException {
+    public void assignSpaceshipOnMission(Spaceship spaceship) throws RuntimeException {
 
     }
 
@@ -59,9 +59,15 @@ public enum SpaceshipServiceImpl implements SpaceshipService {
     public Spaceship createSpaceship(Object ...args) throws RuntimeException {
         Spaceship newSpaceship = factory.create(args[0], args[1], args[2]);
         return NassaContext.INSTANCE.retrieveBaseEntityList(Spaceship.class).stream()
-                .filter(spaceship -> newSpaceship.getName().equals(spaceship.getName()))
+                .filter((spaceship) -> {
+                    if (newSpaceship.getName().equals(spaceship.getName())) {
+                        System.out.println("WORKKKK");
+                        return true;
+                    }
+                    return false;
+                    })
                 .findFirst()
-                .orElse(setIdAndAddToCollection(newSpaceship));
+                .orElseGet(() -> setIdAndAddToCollection(newSpaceship));
     }
 
     private Spaceship setIdAndAddToCollection(Spaceship spaceship) {

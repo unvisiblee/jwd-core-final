@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public enum  MissionServiceImpl implements MissionService {
+public enum   MissionServiceImpl implements MissionService {
     INSTANCE;
 
     private Long id = 1L;
@@ -48,15 +48,20 @@ public enum  MissionServiceImpl implements MissionService {
 
     @Override
     public Optional<FlightMission> findMissionByCriteria(Criteria<? extends FlightMission> criteria) {
-        //todo
         return findAllMissionsByCriteria(criteria).stream().findFirst();
 
     }
 
     @Override
-    public FlightMission updateSpaceshipDetails(FlightMission flightMission) {
-        // todo
-        return null;
+    public FlightMission updateMissionDetails(FlightMission flightMission) {
+        Optional<FlightMission> mission = NassaContext.INSTANCE.retrieveBaseEntityList(FlightMission.class).stream()
+                .filter(flightMission1 -> flightMission.getName().equals(flightMission1.getName()))
+                .findFirst();
+        if (mission.isPresent()) {
+            NassaContext.INSTANCE.retrieveBaseEntityList(FlightMission.class).remove(mission.get());
+            NassaContext.INSTANCE.retrieveBaseEntityList(FlightMission.class).add(flightMission);
+            return flightMission;
+        } else return null;
     }
 
     @Override

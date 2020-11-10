@@ -47,8 +47,15 @@ public enum CrewServiceImpl implements CrewService {
     }
 
     @Override
-    public CrewMember updateCrewMemberDetails(CrewMember crewMember) { // todo
-        return null;
+    public CrewMember updateCrewMemberDetails(CrewMember crewMember) {
+        Optional<CrewMember> member = NassaContext.INSTANCE.retrieveBaseEntityList(CrewMember.class).stream()
+                .filter(crewMember1 -> crewMember.getName().equals(crewMember1.getName()))
+                .findFirst();
+        if (!member.isEmpty()) {
+            NassaContext.INSTANCE.retrieveBaseEntityList(CrewMember.class).remove(member.get());
+            NassaContext.INSTANCE.retrieveBaseEntityList(CrewMember.class).add(crewMember);
+            return crewMember;
+        } else return null;
     }
 
     @Override

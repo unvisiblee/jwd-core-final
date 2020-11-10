@@ -41,7 +41,7 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
         }
 
         @Override
-        public Criteria<? extends BaseEntity> build() {
+        public Criteria<Spaceship> build() {
             SpaceshipCriteria newCriteria =  new SpaceshipCriteria(this);
             newCriteria.setCrew(this.crew);
             newCriteria.setFlightDistance(this.flightDistance);

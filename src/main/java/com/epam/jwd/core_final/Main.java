@@ -1,19 +1,14 @@
 package com.epam.jwd.core_final;
 
 import com.epam.jwd.core_final.context.Application;
+import com.epam.jwd.core_final.context.ApplicationMenu;
 import com.epam.jwd.core_final.context.impl.NassaContext;
-import com.epam.jwd.core_final.criteria.CrewMemberCriteria;
-import com.epam.jwd.core_final.criteria.Criteria;
-import com.epam.jwd.core_final.domain.ApplicationProperties;
 import com.epam.jwd.core_final.domain.CrewMember;
-import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.domain.Spaceship;
+import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.strategy.impl.ReadCrewStrategy;
 import com.epam.jwd.core_final.strategy.impl.ReadSpaceshipsStrategy;
-import com.epam.jwd.core_final.util.Logger;
-import com.epam.jwd.core_final.util.PropertyReaderUtil;
-
-import java.io.FileNotFoundException;
+import com.epam.jwd.core_final.util.LoggerImpl;
 
 
 public class Main {
@@ -26,15 +21,19 @@ public class Main {
         Logger.INSTANCE.logger.info("test");
         Application.start();
         System.out.println(Role.COMMANDER.getName());*/
+        LoggerImpl.INSTANCE.logger.info("TEST");
 
-        ReadCrewStrategy readCrewStrategy = new ReadCrewStrategy();
-        readCrewStrategy.read("/home/unvisiblee/IdeaProjects/jwd-core-final/src/main/resources/input/crew");
-        ReadSpaceshipsStrategy readSpaceshipsStrategy = new ReadSpaceshipsStrategy();
-        readSpaceshipsStrategy.read("/home/unvisiblee/IdeaProjects/jwd-core-final/src/main/resources/input/spaceships");
+        ApplicationMenu menu = null;
+        try {
+            menu = Application.start();
+         } catch (InvalidStateException ex) {
+             LoggerImpl.INSTANCE.logger.error("Unable to start the app");
+             System.exit(1);
+        }
+
+        menu.printAvailableOptions();
 
 
-        System.out.println(NassaContext.INSTANCE.retrieveBaseEntityList(CrewMember.class));
-        System.out.println(NassaContext.INSTANCE.retrieveBaseEntityList(Spaceship.class));
 
 
     }

@@ -1,9 +1,10 @@
 package com.epam.jwd.core_final.strategy.impl;
 
 import com.epam.jwd.core_final.domain.Role;
+import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.service.impl.SpaceshipServiceImpl;
 import com.epam.jwd.core_final.strategy.ReadStrategy;
-import com.epam.jwd.core_final.util.Logger;
+import com.epam.jwd.core_final.util.LoggerImpl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,13 +14,13 @@ import java.util.Scanner;
 
 public class ReadSpaceshipsStrategy implements ReadStrategy {
     @Override
-    public void read(String filePath) {
+    public void read(String filePath) throws InvalidStateException {
         Scanner scanner = null;
         try {
             scanner = new Scanner(new File(filePath));
         } catch (FileNotFoundException ex) {
-            Logger.INSTANCE.logger.error(ex.getMessage());
-            return;
+            LoggerImpl.INSTANCE.logger.error(ex.getMessage());
+            throw new InvalidStateException(filePath);
         }
         scanner.nextLine();
         scanner.nextLine();
@@ -31,7 +32,6 @@ public class ReadSpaceshipsStrategy implements ReadStrategy {
             String name = args[0];
             Long distance = Long.valueOf(args[1]);
             String[] mapArgs = args[2].substring(1, args[2].length() - 1).split(","); // cutting off the braces
-            System.out.println(Arrays.toString(mapArgs));
             HashMap<Role, Short> crewMap = new HashMap<>();
             for (String roleCountCouple: mapArgs) {
                 String[] roleCountArray = roleCountCouple.split(":");

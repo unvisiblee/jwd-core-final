@@ -1,12 +1,11 @@
 package com.epam.jwd.core_final.strategy.impl;
 
-import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Rank;
 import com.epam.jwd.core_final.domain.Role;
-import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
+import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.service.impl.CrewServiceImpl;
 import com.epam.jwd.core_final.strategy.ReadStrategy;
-import com.epam.jwd.core_final.util.Logger;
+import com.epam.jwd.core_final.util.LoggerImpl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,13 +13,13 @@ import java.util.Scanner;
 
 public class ReadCrewStrategy implements ReadStrategy {
     @Override
-    public void read(String filePath) {
+    public void read(String filePath) throws InvalidStateException {
         Scanner scanner = null;
         try {
             scanner = new Scanner(new File(filePath));
         } catch (FileNotFoundException ex) {
-            Logger.INSTANCE.logger.error(ex.getMessage());
-            return;
+            LoggerImpl.INSTANCE.logger.error(ex.getMessage());
+            throw new InvalidStateException(filePath);
         }
         scanner.nextLine();
         scanner.useDelimiter(";");

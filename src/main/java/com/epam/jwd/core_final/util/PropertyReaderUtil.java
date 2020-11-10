@@ -20,12 +20,12 @@ public enum PropertyReaderUtil {
      * values from property file
      */
     private static void loadProperties()  {
-        final String propertiesFileName = "/home/unvisiblee/IdeaProjects/jwd-core-final/src/main/resources/application.properties"; // todo: replace with universal path
+        final String propertiesFileName = "src/main/resources/application.properties"; // todo: replace with universal path
 
         try(InputStream inputStream = new FileInputStream(propertiesFileName)) {
             properties.load(inputStream);
         } catch (IOException e) {
-            Logger.INSTANCE.logger.error(e.getMessage());
+            LoggerImpl.INSTANCE.logger.error(e.getMessage());
         }
     }
 

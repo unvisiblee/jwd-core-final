@@ -1,16 +1,75 @@
 package com.epam.jwd.core_final.context;
 
+import com.epam.jwd.core_final.context.impl.AddNewMissionSubMenu;
+import com.epam.jwd.core_final.context.impl.ViewEntitiesSubMenu;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 // todo replace Object with your own types
 @FunctionalInterface
 public interface ApplicationMenu {
 
     ApplicationContext getApplicationContext();
 
-    default Object printAvailableOptions() {
-        return null;
+    default Integer printAvailableOptions() {
+
+         Scanner scanner = new Scanner(System.in);
+         int option;
+         while (true) {
+
+             System.out.println("1. Add new mission\n" +
+                     "2. View entities\n" +
+                     "3. Update entities\n" +
+                     "4. Print info in JSON format\n" +
+                     "0. Close the app");
+
+             try {
+                 option = scanner.nextInt();
+                 if (option == 0)
+                     break;
+
+                 handleUserInput(option);
+             } catch (InputMismatchException ex) {
+                 System.out.println("You've entered wrong option, please try again: ");
+                 scanner.next();
+             }
+         }
+        return 0;
     }
 
-    default Object handleUserInput(Object o) {
+    default Object handleUserInput(Integer option) {
+        System.out.println("test");
+        switch (option) {
+            case 1:
+            {
+                AddNewMissionSubMenu.addMission();
+                break;
+            }
+
+            case 2:
+            {
+                ViewEntitiesSubMenu.viewEntities();
+                break;
+            }
+
+            case 3:
+            {
+
+            }
+
+            case 4:
+            {
+
+            }
+
+            case 5:
+            {
+
+            }
+            default:
+                return null;
+        }
         return null;
     }
 }
