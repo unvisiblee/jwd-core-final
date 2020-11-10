@@ -2,7 +2,6 @@ package com.epam.jwd.core_final.context.impl;
 
 import com.epam.jwd.core_final.context.ApplicationSubMenu;
 import com.epam.jwd.core_final.criteria.CrewMemberCriteria;
-import com.epam.jwd.core_final.criteria.Criteria;
 import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
@@ -19,7 +18,7 @@ import java.util.*;
 public class AddNewMissionSubMenu implements ApplicationSubMenu {
 
     public static void addMission() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
         ViewEntitiesSubMenu.viewAllSpaceships();
 
@@ -43,7 +42,7 @@ public class AddNewMissionSubMenu implements ApplicationSubMenu {
 
         List<CrewMember> crewList = new ArrayList<>();
         Map<Role, Short> crew =  spaceship.get().getCrew();
-        CrewMemberCriteria.CrewMemberBuilder  memberCriteriaBuilder = new CrewMemberCriteria.CrewMemberBuilder();
+        CrewMemberCriteria.CrewMemberCriteriaBuilder memberCriteriaBuilder = new CrewMemberCriteria.CrewMemberCriteriaBuilder();
 
         for (Map.Entry<Role, Short> entry: crew.entrySet()) { // assigning crew for mission
             CrewMemberCriteria criteria = (CrewMemberCriteria) memberCriteriaBuilder

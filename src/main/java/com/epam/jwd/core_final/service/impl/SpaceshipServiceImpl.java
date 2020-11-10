@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public enum SpaceshipServiceImpl implements SpaceshipService {
     INSTANCE;
 
-    private Long id = 1L;
+    private Long id = 0L;
     private SpaceshipFactory factory = new SpaceshipFactory();
     @Override
     public List<Spaceship> findAllSpaceships() {
@@ -59,13 +59,7 @@ public enum SpaceshipServiceImpl implements SpaceshipService {
     public Spaceship createSpaceship(Object ...args) throws RuntimeException {
         Spaceship newSpaceship = factory.create(args[0], args[1], args[2]);
         return NassaContext.INSTANCE.retrieveBaseEntityList(Spaceship.class).stream()
-                .filter((spaceship) -> {
-                    if (newSpaceship.getName().equals(spaceship.getName())) {
-                        System.out.println("WORKKKK");
-                        return true;
-                    }
-                    return false;
-                    })
+                .filter((spaceship) -> newSpaceship.getName().equals(spaceship.getName()))
                 .findFirst()
                 .orElseGet(() -> setIdAndAddToCollection(newSpaceship));
     }

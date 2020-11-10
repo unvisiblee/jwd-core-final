@@ -1,6 +1,5 @@
 package com.epam.jwd.core_final.criteria;
 
-import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Rank;
 import com.epam.jwd.core_final.domain.Role;
@@ -13,13 +12,13 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
     private Rank rank;
     private Boolean isReadyForNextMissions;
 
-    public static class CrewMemberBuilder extends Criteria.Builder<CrewMemberBuilder> {
+    public static class CrewMemberCriteriaBuilder extends Criteria.Builder<CrewMemberCriteriaBuilder> {
          private Role role;
          private Rank rank;
          private Boolean isReadyForNextMissions;
 
         @Override
-        protected CrewMemberBuilder getThis() {
+        protected CrewMemberCriteriaBuilder getThis() {
             return this;
         }
 
@@ -32,17 +31,17 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
             return newCriteria;
         }
 
-        public CrewMemberBuilder role(Role role) {
+        public CrewMemberCriteriaBuilder role(Role role) {
             this.role = role;
             return this;
         }
 
-        public CrewMemberBuilder rank(Rank rank) {
+        public CrewMemberCriteriaBuilder rank(Rank rank) {
             this.rank = rank;
             return this;
         }
 
-        public CrewMemberBuilder isReadyForNextMissions(Boolean isReadyForNextMissions) {
+        public CrewMemberCriteriaBuilder isReadyForNextMissions(Boolean isReadyForNextMissions) {
             this.isReadyForNextMissions = isReadyForNextMissions;
             return this;
         }

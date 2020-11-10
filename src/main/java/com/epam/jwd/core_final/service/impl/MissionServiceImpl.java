@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public enum   MissionServiceImpl implements MissionService {
     INSTANCE;
 
-    private Long id = 1L;
+    private Long id = 0L;
     private FlightMissionFactory missionFactory = new FlightMissionFactory();
 
     @Override
@@ -72,7 +72,7 @@ public enum   MissionServiceImpl implements MissionService {
                 .INSTANCE.retrieveBaseEntityList(FlightMission.class).stream()
                 .filter(mission -> newMission.getName().equals(mission.getName()))
                 .findFirst()
-                .orElse(setIdAndAddToCollection(newMission));
+                .orElseGet(() -> setIdAndAddToCollection(newMission));
     }
 
     private FlightMission setIdAndAddToCollection(FlightMission flightMission) {

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public enum CrewServiceImpl implements CrewService {
     INSTANCE;
 
-    private Long id = 1L;
+    private Long id = 0L;
     private final CrewMemberFactory crewFactory = new CrewMemberFactory();
 
     @Override
@@ -75,7 +75,7 @@ public enum CrewServiceImpl implements CrewService {
                 .INSTANCE.retrieveBaseEntityList(CrewMember.class).stream()
                     .filter(member -> newMember.getName().equals(member.getName()))
                     .findFirst()
-                    .orElse(setIdAndAddToCollection(newMember));
+                    .orElseGet(() -> setIdAndAddToCollection(newMember));
     }
 
     private CrewMember setIdAndAddToCollection(CrewMember crewMember) {

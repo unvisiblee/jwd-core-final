@@ -6,6 +6,7 @@ import com.epam.jwd.core_final.domain.MissionResult;
 import com.epam.jwd.core_final.domain.Spaceship;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -13,8 +14,8 @@ import java.util.List;
  */
 public class FlightMissionCriteria extends Criteria<FlightMission> {
     private String name;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private Long distance;
     private Spaceship assignedSpaceShip;
     private List<CrewMember> assignedCrew;
@@ -23,8 +24,8 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
 
     public static class FlightMissionCriteriaBuilder extends Builder<FlightMissionCriteria.FlightMissionCriteriaBuilder> {
         private String name;
-        private LocalDate startDate;
-        private LocalDate endDate;
+        private LocalDateTime startDate;
+        private LocalDateTime endDate;
         private Long distance;
         private Spaceship assignedSpaceShip;
         private List<CrewMember> assignedCrew;
@@ -35,12 +36,12 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
             return this;
         }
 
-        public FlightMissionCriteriaBuilder startDate(LocalDate newStartDate) {
+        public FlightMissionCriteriaBuilder startDate(LocalDateTime newStartDate) {
             this.startDate = newStartDate;
             return this;
         }
 
-        public FlightMissionCriteriaBuilder endDate(LocalDate newEndDate) {
+        public FlightMissionCriteriaBuilder endDate(LocalDateTime newEndDate) {
             this.endDate = newEndDate;
             return this;
         }
@@ -93,11 +94,11 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
         return name;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public LocalDate getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 

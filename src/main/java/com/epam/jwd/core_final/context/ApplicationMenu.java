@@ -1,6 +1,7 @@
 package com.epam.jwd.core_final.context;
 
 import com.epam.jwd.core_final.context.impl.AddNewMissionSubMenu;
+import com.epam.jwd.core_final.context.impl.UpdateEntitiesSubMenu;
 import com.epam.jwd.core_final.context.impl.ViewEntitiesSubMenu;
 
 import java.util.InputMismatchException;
@@ -55,7 +56,7 @@ public interface ApplicationMenu {
 
             case 3:
             {
-
+                UpdateEntitiesSubMenu.updateEntities();
             }
 
             case 4:
