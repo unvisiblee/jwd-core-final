@@ -15,6 +15,7 @@ public enum FlightMissionStatusHandler {
     INSTANCE;
 
     public static void handle() {
+        LoggerImpl.INSTANCE.logger.info("Handling Flight Missions statuses...");
         List<FlightMission> missionList = MissionServiceImpl.INSTANCE.findAllMissions();
 
         for (FlightMission mission: missionList) {

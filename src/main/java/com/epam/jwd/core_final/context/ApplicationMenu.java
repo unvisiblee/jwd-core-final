@@ -6,6 +6,7 @@ import com.epam.jwd.core_final.context.impl.UpdateEntitiesSubMenu;
 import com.epam.jwd.core_final.context.impl.ViewEntitiesSubMenu;
 import com.epam.jwd.core_final.util.ConsoleColors;
 import com.epam.jwd.core_final.util.InputFilesUpdateController;
+import com.epam.jwd.core_final.util.LoggerImpl;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -21,6 +22,8 @@ public interface ApplicationMenu {
          int option;
          while (true) {
              InputFilesUpdateController.checkFilesLastModifiedTime();
+
+             LoggerImpl.INSTANCE.logger.info("Main menu iteration");
 
              System.out.println(ConsoleColors.BLACK_BOLD + "1. Add new mission\n" +
                      "2. View entities\n" +

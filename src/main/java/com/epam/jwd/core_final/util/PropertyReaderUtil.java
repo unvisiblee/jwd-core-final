@@ -20,6 +20,7 @@ public enum PropertyReaderUtil {
      * values from property file
      */
     private static void loadProperties()  {
+        LoggerImpl.INSTANCE.logger.info("Loading properties from .properties file...");
         final String propertiesFileName = "src/main/resources/application.properties";
 
         try(InputStream inputStream = new FileInputStream(propertiesFileName)) {
