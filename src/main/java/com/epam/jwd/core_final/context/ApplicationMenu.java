@@ -33,7 +33,7 @@ public interface ApplicationMenu {
 
              try {
                  option = scanner.nextInt();
-                 if (option == 0)
+                 if (option == 0) 
                      break;
 
                  handleUserInput(option);
