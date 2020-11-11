@@ -63,5 +63,4 @@ public class ApplicationProperties {
         return dateTimeFormat;
     }
 
-    //todo
 }

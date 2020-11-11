@@ -24,7 +24,7 @@ public class Main {
         System.out.println(Role.COMMANDER.getName());*/
         LoggerImpl.INSTANCE.logger.info("TEST");
 
-/*        ApplicationMenu menu = null;
+        ApplicationMenu menu = null;
         try {
             menu = Application.start();
          } catch (InvalidStateException ex) {
@@ -32,7 +32,7 @@ public class Main {
              System.exit(1);
         }
 
-        menu.printAvailableOptions();*/
+        menu.printAvailableOptions();
         InputFilesUpdateController.checkFilesLastModifiedTime();
 
 

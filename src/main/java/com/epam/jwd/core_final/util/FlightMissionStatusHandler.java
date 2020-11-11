@@ -18,19 +18,18 @@ public enum FlightMissionStatusHandler {
         List<FlightMission> missionList = MissionServiceImpl.INSTANCE.findAllMissions();
 
         for (FlightMission mission: missionList) {
-            if (mission.getEndDate().isBefore(LocalDateTime.now())) {
+            if (!mission.getMissionResult().equals(MissionResult.COMPLETED) && mission.getEndDate().isBefore(LocalDateTime.now())) {
                 mission.setMissionResult(MissionResult.COMPLETED);
                 releaseAllCrewMembers(mission);
-                return;
             }
 
             if (mission.getMissionResult().equals(MissionResult.PLANNED)) {
                 mission.setMissionResult(MissionResult.IN_PROGRESS);
             } else if (mission.getMissionResult().equals(MissionResult.IN_PROGRESS)) {
                 Random random = new Random();
-                if (random.nextInt(99) < 5) {
+                if (random.nextInt(99) < 10) {
                     mission.setMissionResult(MissionResult.FAILED);
-                };
+                }
             }
         }
     }

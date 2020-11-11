@@ -13,9 +13,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static javafx.application.Platform.exit;
 
-// todo
 public class NassaContext implements ApplicationContext {
 
     public static final NassaContext INSTANCE = new NassaContext();
@@ -54,7 +52,6 @@ public class NassaContext implements ApplicationContext {
             LoggerImpl.INSTANCE.logger.info("Initialized Context!");
         } catch (FileNotFoundException ex) {
             LoggerImpl.INSTANCE.logger.error(ex.getMessage());
-            exit();
         }
     }
 

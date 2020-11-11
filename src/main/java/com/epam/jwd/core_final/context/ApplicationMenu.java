@@ -4,11 +4,11 @@ import com.epam.jwd.core_final.context.impl.AddNewMissionSubMenu;
 import com.epam.jwd.core_final.context.impl.ExportInfoInJSONFormatSubMenu;
 import com.epam.jwd.core_final.context.impl.UpdateEntitiesSubMenu;
 import com.epam.jwd.core_final.context.impl.ViewEntitiesSubMenu;
+import com.epam.jwd.core_final.util.InputFilesUpdateController;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// todo replace Object with your own types
 @FunctionalInterface
 public interface ApplicationMenu {
 
@@ -19,6 +19,7 @@ public interface ApplicationMenu {
          Scanner scanner = new Scanner(System.in);
          int option;
          while (true) {
+             InputFilesUpdateController.checkFilesLastModifiedTime();
 
              System.out.println("1. Add new mission\n" +
                      "2. View entities\n" +
@@ -57,11 +58,13 @@ public interface ApplicationMenu {
             case 3:
             {
                 UpdateEntitiesSubMenu.updateEntities();
+                break;
             }
 
             case 4:
             {
                 ExportInfoInJSONFormatSubMenu.exportInfo();
+                break;
             }
 
             case 5:

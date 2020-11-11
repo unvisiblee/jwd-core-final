@@ -20,7 +20,7 @@ public enum PropertyReaderUtil {
      * values from property file
      */
     private static void loadProperties()  {
-        final String propertiesFileName = "src/main/resources/application.properties"; // todo: replace with universal path
+        final String propertiesFileName = "src/main/resources/application.properties";
 
         try(InputStream inputStream = new FileInputStream(propertiesFileName)) {
             properties.load(inputStream);

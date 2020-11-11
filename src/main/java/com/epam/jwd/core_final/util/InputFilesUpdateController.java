@@ -4,9 +4,11 @@ import com.epam.jwd.core_final.context.impl.NassaContext;
 import com.epam.jwd.core_final.exception.InvalidStateException;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
 public enum InputFilesUpdateController {
     INSTANCE;
@@ -15,11 +17,12 @@ public enum InputFilesUpdateController {
     private static String crewInputPath = PropertyReaderUtil.getApplicationProperties().getCrewFileName();
     private static String spaceShipInputPath = PropertyReaderUtil.getApplicationProperties().getSpaceshipsFileName();
 
-    private static LocalDateTime lastDateTimeModified = LocalDateTime.MIN;
+    private static LocalDateTime lastDateTimeModified = LocalDateTime.now();
 
     public static void checkFilesLastModifiedTime() {
         if (LocalDateTime.now().minusMinutes((long) PropertyReaderUtil.getApplicationProperties().getFileRefreshRate()).isAfter(lastTimeInited)) {
             lastTimeInited = LocalDateTime.now();
+            LoggerImpl.INSTANCE.logger.info("Reiniting Context!");
 
             long lastModifiedEpochMillis = Math.max(new File(crewInputPath).lastModified(), (new File(spaceShipInputPath).lastModified()));
             LocalDateTime lastTimeModified = LocalDateTime.ofEpochSecond(lastModifiedEpochMillis/1000,0, ZoneOffset.ofHours(3));

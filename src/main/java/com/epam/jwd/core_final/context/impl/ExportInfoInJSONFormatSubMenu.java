@@ -63,7 +63,7 @@ public class ExportInfoInJSONFormatSubMenu implements ApplicationSubMenu {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             String filepath = "output/" + flightMission.get().getName() + ".json";
-            objectMapper.writeValue(new File(filepath), flightMission);
+            objectMapper.writeValue(new File(filepath), flightMission.get());
         } catch (IOException ex) {
             LoggerImpl.INSTANCE.logger.error("Error exporting object in JSON " + flightMission.get().getName());
         }

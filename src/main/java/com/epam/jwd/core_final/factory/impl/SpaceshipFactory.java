@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class SpaceshipFactory implements EntityFactory<Spaceship> {
     @Override
-    public Spaceship create(Object ...args) { // todo
+    public Spaceship create(Object ...args) {
         // String name, HashMap<Role, Short>, Long distance
         if (args.length != 3)
             throw new IllegalSpaceShipCreateArgsException(args);
