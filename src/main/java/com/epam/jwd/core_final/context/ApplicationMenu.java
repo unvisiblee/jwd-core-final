@@ -47,10 +47,22 @@ public interface ApplicationMenu {
 
     default Object handleUserInput(Integer option) {
         switch (option) {
-            case 1 -> AddNewMissionSubMenu.addMission();
-            case 2 -> ViewEntitiesSubMenu.viewEntities();
-            case 3 -> UpdateEntitiesSubMenu.updateEntities();
-            case 4 -> ExportInfoInJSONFormatSubMenu.exportInfo();
+            case 1: {
+                AddNewMissionSubMenu.addMission();
+                break;
+            }
+            case 2: {
+                ViewEntitiesSubMenu.viewEntities();
+                break;
+            }
+            case 3: {
+                UpdateEntitiesSubMenu.updateEntities();
+                break;
+            }
+            case 4: {
+                ExportInfoInJSONFormatSubMenu.exportInfo();
+                break;
+            }
         }
         return null;
     }
