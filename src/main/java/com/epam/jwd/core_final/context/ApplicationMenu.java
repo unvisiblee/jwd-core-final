@@ -4,6 +4,7 @@ import com.epam.jwd.core_final.context.impl.AddNewMissionSubMenu;
 import com.epam.jwd.core_final.context.impl.ExportInfoInJSONFormatSubMenu;
 import com.epam.jwd.core_final.context.impl.UpdateEntitiesSubMenu;
 import com.epam.jwd.core_final.context.impl.ViewEntitiesSubMenu;
+import com.epam.jwd.core_final.util.ConsoleColors;
 import com.epam.jwd.core_final.util.InputFilesUpdateController;
 
 import java.util.InputMismatchException;
@@ -21,11 +22,11 @@ public interface ApplicationMenu {
          while (true) {
              InputFilesUpdateController.checkFilesLastModifiedTime();
 
-             System.out.println("1. Add new mission\n" +
+             System.out.println(ConsoleColors.BLACK_BOLD + "1. Add new mission\n" +
                      "2. View entities\n" +
                      "3. Update entities\n" +
                      "4. Print info in JSON format\n" +
-                     "0. Close the app");
+                     "0. Close the app" + ConsoleColors.RESET);
 
              try {
                  option = scanner.nextInt();
@@ -43,34 +44,10 @@ public interface ApplicationMenu {
 
     default Object handleUserInput(Integer option) {
         switch (option) {
-            case 1:
-            {
-                AddNewMissionSubMenu.addMission();
-                break;
-            }
-
-            case 2:
-            {
-                ViewEntitiesSubMenu.viewEntities();
-                break;
-            }
-
-            case 3:
-            {
-                UpdateEntitiesSubMenu.updateEntities();
-                break;
-            }
-
-            case 4:
-            {
-                ExportInfoInJSONFormatSubMenu.exportInfo();
-                break;
-            }
-
-            case 5:
-            {
-                return null;
-            }
+            case 1 -> AddNewMissionSubMenu.addMission();
+            case 2 -> ViewEntitiesSubMenu.viewEntities();
+            case 3 -> UpdateEntitiesSubMenu.updateEntities();
+            case 4 -> ExportInfoInJSONFormatSubMenu.exportInfo();
         }
         return null;
     }
