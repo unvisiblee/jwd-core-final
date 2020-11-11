@@ -9,6 +9,7 @@ import com.epam.jwd.core_final.exception.CrewMemberIsNotReadyForMissionException
 import com.epam.jwd.core_final.exception.IllegalCreateArgsException;
 import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
 import com.epam.jwd.core_final.service.CrewService;
+import com.epam.jwd.core_final.util.LoggerImpl;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -63,8 +64,6 @@ public enum CrewServiceImpl implements CrewService {
         if (crewMember.getReadyForNextMissions())
             mission.getAssignedCrew().add(crewMember);
         else throw new CrewMemberIsNotReadyForMissionException();
-        // todo
-
     }
 
 
@@ -81,6 +80,8 @@ public enum CrewServiceImpl implements CrewService {
     private CrewMember setIdAndAddToCollection(CrewMember crewMember) {
         crewMember.setId(++id);
         NassaContext.INSTANCE.retrieveBaseEntityList(CrewMember.class).add(crewMember);
+        LoggerImpl.INSTANCE.logger.info("Created Crew Member with id: " + (id + 1));
+
         return crewMember;
     }
 }

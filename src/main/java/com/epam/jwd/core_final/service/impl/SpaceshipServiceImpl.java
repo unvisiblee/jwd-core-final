@@ -7,6 +7,7 @@ import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
 import com.epam.jwd.core_final.service.SpaceshipService;
+import com.epam.jwd.core_final.util.LoggerImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -67,6 +68,8 @@ public enum SpaceshipServiceImpl implements SpaceshipService {
     private Spaceship setIdAndAddToCollection(Spaceship spaceship) {
         spaceship.setId(++id);
         NassaContext.INSTANCE.retrieveBaseEntityList(Spaceship.class).add(spaceship);
+        LoggerImpl.INSTANCE.logger.info("Created Spaceship with id: " + (id + 1));
+
         return spaceship;
     }
 }

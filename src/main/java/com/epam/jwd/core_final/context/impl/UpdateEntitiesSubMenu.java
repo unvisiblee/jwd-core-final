@@ -3,10 +3,13 @@ package com.epam.jwd.core_final.context.impl;
 import com.epam.jwd.core_final.context.ApplicationSubMenu;
 import com.epam.jwd.core_final.criteria.CrewMemberCriteria;
 import com.epam.jwd.core_final.criteria.FlightMissionCriteria;
+import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
 import com.epam.jwd.core_final.domain.*;
 import com.epam.jwd.core_final.service.CrewService;
+import com.epam.jwd.core_final.service.SpaceshipService;
 import com.epam.jwd.core_final.service.impl.CrewServiceImpl;
 import com.epam.jwd.core_final.service.impl.MissionServiceImpl;
+import com.epam.jwd.core_final.service.impl.SpaceshipServiceImpl;
 import com.epam.jwd.core_final.util.ConsoleColors;
 
 import java.util.Optional;
@@ -106,7 +109,8 @@ public class UpdateEntitiesSubMenu implements ApplicationSubMenu {
     }
 
     private static void updateFlightMissions() {
-        ViewEntitiesSubMenu.viewAllSpaceships();
+
+        ViewEntitiesSubMenu.viewAllFlightMissions();
 
         System.out.println(ConsoleColors.GREEN_BOLD + "Enter ID of the mission you want to update: " + ConsoleColors.RESET);
         int missionId = ApplicationSubMenu.getIntFromUser(new Scanner(System.in));
@@ -160,5 +164,35 @@ public class UpdateEntitiesSubMenu implements ApplicationSubMenu {
 
 
     private static void updateSpaceships() {
+        System.out.println(ConsoleColors.GREEN_BOLD + "You can only change Mission's Flight distance, do you want to " +
+                "change it?:\n" +
+                "1. Yes,\n" +
+                "0. Return to the previous menu.\n" + ConsoleColors.RESET);
+        int option = ApplicationSubMenu.getIntFromUser(new Scanner(System.in));
+
+        if (option == 0)
+            return;
+
+        ViewEntitiesSubMenu.viewAllSpaceships();
+        System.out.println(ConsoleColors.GREEN_BOLD + "Enter ID of spaceship you want to change flying distance of:" +
+                 ConsoleColors.RESET);
+        int id = ApplicationSubMenu.getIntFromUser(new Scanner(System.in));
+        SpaceshipCriteria.SpaceshipCriteriaBuilder criteriaBuilder = new SpaceshipCriteria.SpaceshipCriteriaBuilder();
+        criteriaBuilder.id((long) id);
+        Optional<Spaceship> spaceship = SpaceshipServiceImpl.INSTANCE.findSpaceshipByCriteria(criteriaBuilder.build());
+        if (spaceship.isEmpty()) {
+            System.out.println(ConsoleColors.RED + "ID you've entered does not exist, check your input and try again" +
+                    ConsoleColors.RESET);
+            return;
+        }
+
+        System.out.println(ConsoleColors.GREEN_BOLD + "Enter new Distance of chosen spaceship:" + ConsoleColors.RESET);
+        int newDistance = ApplicationSubMenu.getIntFromUser(new Scanner(System.in));
+
+        spaceship.get().setFlightDistance((long) newDistance);
+        SpaceshipServiceImpl.INSTANCE.updateSpaceshipDetails(spaceship.get());
+
+
+
     }
 }

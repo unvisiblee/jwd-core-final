@@ -1,6 +1,7 @@
 package com.epam.jwd.core_final.context;
 
 import com.epam.jwd.core_final.context.impl.AddNewMissionSubMenu;
+import com.epam.jwd.core_final.context.impl.ExportInfoInJSONFormatSubMenu;
 import com.epam.jwd.core_final.context.impl.UpdateEntitiesSubMenu;
 import com.epam.jwd.core_final.context.impl.ViewEntitiesSubMenu;
 
@@ -40,7 +41,6 @@ public interface ApplicationMenu {
     }
 
     default Object handleUserInput(Integer option) {
-        System.out.println("test");
         switch (option) {
             case 1:
             {
@@ -61,15 +61,13 @@ public interface ApplicationMenu {
 
             case 4:
             {
-
+                ExportInfoInJSONFormatSubMenu.exportInfo();
             }
 
             case 5:
             {
-
-            }
-            default:
                 return null;
+            }
         }
         return null;
     }

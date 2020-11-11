@@ -7,6 +7,7 @@ import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import com.epam.jwd.core_final.service.MissionService;
+import com.epam.jwd.core_final.util.LoggerImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -78,6 +79,8 @@ public enum   MissionServiceImpl implements MissionService {
     private FlightMission setIdAndAddToCollection(FlightMission flightMission) {
         flightMission.setId(++id);
         NassaContext.INSTANCE.retrieveBaseEntityList(FlightMission.class).add(flightMission);
+        LoggerImpl.INSTANCE.logger.info("Created Flight Mission with id: " + (id + 1));
+
         return flightMission;
     }
 }

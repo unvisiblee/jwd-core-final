@@ -8,6 +8,7 @@ import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.strategy.impl.ReadCrewStrategy;
 import com.epam.jwd.core_final.strategy.impl.ReadSpaceshipsStrategy;
+import com.epam.jwd.core_final.util.InputFilesUpdateController;
 import com.epam.jwd.core_final.util.LoggerImpl;
 
 
@@ -23,7 +24,7 @@ public class Main {
         System.out.println(Role.COMMANDER.getName());*/
         LoggerImpl.INSTANCE.logger.info("TEST");
 
-        ApplicationMenu menu = null;
+/*        ApplicationMenu menu = null;
         try {
             menu = Application.start();
          } catch (InvalidStateException ex) {
@@ -31,7 +32,8 @@ public class Main {
              System.exit(1);
         }
 
-        menu.printAvailableOptions();
+        menu.printAvailableOptions();*/
+        InputFilesUpdateController.checkFilesLastModifiedTime();
 
 
 

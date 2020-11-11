@@ -2,6 +2,7 @@ package com.epam.jwd.core_final.context;
 
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.util.ConsoleColors;
+import com.epam.jwd.core_final.util.LoggerImpl;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -16,6 +17,7 @@ public interface ApplicationSubMenu {
                 break;
             } catch (InputMismatchException ex) {
                 System.out.println(ConsoleColors.RED_UNDERLINED + "You've entered wrong option, please try again" + ConsoleColors.RESET);
+                LoggerImpl.INSTANCE.logger.error("Input mismatch!" + scanner.next());
             }
         }
         return option;
@@ -32,6 +34,7 @@ public interface ApplicationSubMenu {
                 else break;
             } catch (InputMismatchException ex) {
                 System.out.println(ConsoleColors.RED + "You've entered wrong number, please try again!" + ConsoleColors.RESET);
+                LoggerImpl.INSTANCE.logger.error("Input mismatch!");
             }
         }
         return id;

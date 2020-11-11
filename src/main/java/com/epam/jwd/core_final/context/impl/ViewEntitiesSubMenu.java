@@ -9,6 +9,8 @@ import com.epam.jwd.core_final.service.impl.CrewServiceImpl;
 import com.epam.jwd.core_final.service.impl.MissionServiceImpl;
 import com.epam.jwd.core_final.service.impl.SpaceshipServiceImpl;
 import com.epam.jwd.core_final.util.ConsoleColors;
+import com.epam.jwd.core_final.util.FlightMissionStatusHandler;
+import com.epam.jwd.core_final.util.LoggerImpl;
 
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
@@ -31,12 +33,9 @@ public class ViewEntitiesSubMenu implements ApplicationSubMenu {
                 handleUserInput(option);
             } catch (InputMismatchException ex) {
                 System.out.println(ConsoleColors.RED + "You've entered wrong option, please try again!" + ConsoleColors.RESET);
-                scanner.next();
+                LoggerImpl.INSTANCE.logger.error("Input mismatch!" + scanner.next());
             }
         }
-
-
-        System.out.println(NassaContext.INSTANCE.retrieveBaseEntityList(FlightMission.class));
     }
 
     static void handleUserInput(int option) {
@@ -158,6 +157,7 @@ public class ViewEntitiesSubMenu implements ApplicationSubMenu {
                 "2. View Missions by Mission Status \n" + ConsoleColors.RESET);
 
         option = ApplicationSubMenu.getIntFromUser(scanner);
+        FlightMissionStatusHandler.handle();
 
         switch (option) {
             case 1:

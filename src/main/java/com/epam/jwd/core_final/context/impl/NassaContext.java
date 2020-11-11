@@ -51,6 +51,7 @@ public class NassaContext implements ApplicationContext {
         try {
             readCrewStrategy.read(appProperties.getCrewFileName());
             readShipsStrategy.read(appProperties.getSpaceshipsFileName());
+            LoggerImpl.INSTANCE.logger.info("Initialized Context!");
         } catch (FileNotFoundException ex) {
             LoggerImpl.INSTANCE.logger.error(ex.getMessage());
             exit();
