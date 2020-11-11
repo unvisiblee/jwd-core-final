@@ -15,14 +15,8 @@ import com.epam.jwd.core_final.util.LoggerImpl;
 public class Main {
 
     public static void main(String[] args) {
-        /*System.out.println(System.getProperty("user.dir"));
-        ApplicationProperties applicationProperties = PropertyReaderUtil.getApplicationProperties();
-        System.out.println("h");
-        Criteria<CrewMember> crewMemberCriteria = new CrewMemberCriteria.CrewMemberBuilder().id(2).isReadyForNextMissions(true).id(1).name("test").build();
-        Logger.INSTANCE.logger.info("test");
-        Application.start();
-        System.out.println(Role.COMMANDER.getName());*/
-        LoggerImpl.INSTANCE.logger.info("TEST");
+
+        LoggerImpl.INSTANCE.logger.info("Starting application");
 
         ApplicationMenu menu = null;
         try {
@@ -33,7 +27,6 @@ public class Main {
         }
 
         menu.printAvailableOptions();
-        InputFilesUpdateController.checkFilesLastModifiedTime();
 
 
 
