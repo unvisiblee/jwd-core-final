@@ -1,28 +1,60 @@
-#JWD Final Java core task
-##Requirements 
-* Fork this [git repository](https://github.com/Rement/jwd-core-final)
-* You should not remove MY comments
-* You have to follow [Java code conventions](https://www.oracle.com/java/technologies/javase/codeconventions-contents.html) ! 
-* Code must compile 
-* You have to do the latest commit before **23:59 7th November (Minsk time)**
-* Use slf4j for logging your actions (You should store INFO or higher messages in output log files, which have 5 generations)
-* You are NOT able to use any codegenerators (i.e. Lombok)
-* Console input should be done using java.util.Scanner
-* Input files contains structure description, starts with hash
+#SQL QUERY:
 
-###Mandatory tasks: 
-* In domain package update entity based on requirements
-* Implements service interfaces
-* Extend missed criteria implementations
-* Update custom exception with meaningful messages (feel free to create your own exceptions, if you need them)
-* Populate context with missing implementation
-* Design UI for ApplicationMenu (user should be able to get/update information about CrewMembers, Spaceships. 
-Able to create/update mission information). 
-Able to write information about selected mission(s) in output file in json format
+```sql
+*drop schema nasa_schema;
+create schema nasa_schema;
+CREATE TABLE IF NOT EXISTS nasa_schema.crew_members(
+    member_id INT PRIMARY KEY,
+    member_name VARCHAR(20) NOT NULL,
+    role_id INT CHECK (role_id < 5 AND role_id > 0),
+    rank_id INT CHECK (rank_id < 5 AND rank_id > 0),
+    is_ready_for_next_mission BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE IF NOT EXISTS nasa_schema.spaceships(
+    spaceship_id INT PRIMARY KEY,
+    spaceship_name VARCHAR(20) NOT NULL,
+    flight_distance LONG CHECK (flight_distance > 0),
+    is_ready_for_next_mission BOOLEAN DEFAULT TRUE
+);
 
 
+CREATE TABLE IF NOT EXISTS nasa_schema.spaceships_crews (
+    spaceship_id INT PRIMARY KEY,
+    spaceship_name VARCHAR(20) NOT NULL,
+    role_id INT CHECK (role_id < 5 AND role_id > 0),
+    members_number INT CHECK (members_number > 0),
+    FOREIGN KEY (spaceship_id) REFERENCES nasa_schema.spaceships(spaceship_id)
+);
 
-###Additional tasks:
-* Create tests using Junit, Mockito for your functionality
-* Implement additional option in a menu (for mission) with real-time flight-status
-* Discuss with mentor any improvements, you want to implement 
+
+CREATE TABLE IF NOT EXISTS nasa_schema.flight_missions (
+    flight_mission_id INT PRIMARY KEY,
+    flight_mission_name VARCHAR(20) NOT NULL,
+    start_date DATETIME DEFAULT NOW(),
+    end_date DATETIME,
+    flight_distance LONG CHECK (flight_distance > 0)
+);
+
+CREATE TABLE IF NOT EXISTS nasa_schema.flight_missions_crews(
+    flight_mission_id INT,
+    crew_member_id INT,
+    PRIMARY KEY (flight_mission_id, crew_member_id),
+    FOREIGN KEY (flight_mission_id) REFERENCES nasa_schema.flight_missions(flight_mission_id),
+    FOREIGN KEY (crew_member_id) REFERENCES nasa_schema.crew_members(member_id)
+);
+
+CREATE TABLE IF NOT EXISTS nasa_schema.flight_missions_spaceships(
+    flight_mission_id INT,
+    spaceship_id INt,
+    PRIMARY KEY (flight_mission_id, spaceship_id),
+    FOREIGN KEY (flight_mission_id) REFERENCES nasa_schema.flight_missions(flight_mission_id),
+    FOREIGN KEY (spaceship_id) REFERENCES nasa_schema.spaceships(spaceship_id),
+    mission_result ENUM('CANCELLED', 'FAILED', 'PLANNED', 'IN_PROGRESS', 'COMPLETED')
+)
+```
+
+#Database diagram:
+
+![picture](/diagram.png)
+
