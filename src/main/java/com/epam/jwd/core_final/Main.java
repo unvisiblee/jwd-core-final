@@ -15,7 +15,6 @@ import com.epam.jwd.core_final.util.LoggerImpl;
 public class Main {
 
     public static void main(String[] args) {
-
         LoggerImpl.INSTANCE.logger.info("Starting application");
 
         ApplicationMenu menu = null;

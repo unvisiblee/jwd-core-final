@@ -29,7 +29,7 @@ public interface ApplicationSubMenu {
         while (true) {
             try {
                 id = scanner.nextInt();
-                if (id > Role.values().length) // if we get not existing value - print error
+                if (id > Role.values().length || id <= 0) // if we get not existing value - print error
                     throw new InputMismatchException();
                 else break;
             } catch (InputMismatchException ex) {
